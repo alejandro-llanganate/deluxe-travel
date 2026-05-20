@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/deluxe-travel/static/css/main.d6bfd15f.css",
+    "main.js": "/deluxe-travel/static/js/main.0a351004.js",
+    "static/js/206.7ece80c3.chunk.js": "/deluxe-travel/static/js/206.7ece80c3.chunk.js",
+    "index.html": "/deluxe-travel/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.d6bfd15f.css",
+    "static/js/main.0a351004.js"
+  ]
+}

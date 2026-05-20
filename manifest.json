@@ -1,0 +1,20 @@
+{
+  "short_name": "Deluxe Travel",
+  "name": "Deluxe Travel Ecuador",
+  "icons": [
+    {
+      "src": "logo_darkmode.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo_darkmode.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#F27127",
+  "background_color": "#ffffff"
+}
