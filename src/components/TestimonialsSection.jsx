@@ -1,32 +1,33 @@
 import React from 'react'
+import { assetPath } from '../utils/assetPath'
 
 const TESTIMONIALS = [
   {
     name: 'María González',
     place: 'Quito, Ecuador',
     text: 'El tour a Misahuallí superó nuestras expectativas. Organización impecable y un trato muy cercano.',
-    img: 'assets/img/testimonial-1.jpg',
+    img: assetPath('assets/img/testimonial-1.jpg'),
     alt: 'María González, cliente',
   },
   {
     name: 'Carlos Ramírez',
     place: 'Guayaquil, Ecuador',
     text: 'Reservamos Montañita para carnaval y todo salió perfecto: traslado, hotel y buena energía del equipo.',
-    img: 'assets/img/testimonial-2.jpg',
+    img: assetPath('assets/img/testimonial-2.jpg'),
     alt: 'Carlos Ramírez, cliente',
   },
   {
     name: 'Ana López',
     place: 'Cuenca, Ecuador',
     text: 'Baños fue una experiencia increíble. Deluxe Travel nos guió en cada detalle del día.',
-    img: 'assets/img/testimonial-3.jpg',
+    img: assetPath('assets/img/testimonial-3.jpg'),
     alt: 'Ana López, cliente',
   },
   {
     name: 'Pedro Mendoza',
     place: 'Ambato, Ecuador',
     text: 'Puerto López y las ballenas: un viaje que recomiendo totalmente. Muy profesionales.',
-    img: 'assets/img/testimonial-4.jpg',
+    img: assetPath('assets/img/testimonial-4.jpg'),
     alt: 'Pedro Mendoza, cliente',
   },
 ]

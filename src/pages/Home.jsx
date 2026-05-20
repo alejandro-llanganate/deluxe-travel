@@ -30,15 +30,15 @@ export default function Home() {
       <HomeHero>
           <div className="row justify-content-center py-5">
             <div className="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-              <h1 className="display-3 text-white mb-3 animated slideInDown">
+              <h1 className="display-3 text-white mb-3 animated slideInDown hero-title">
                 Viajes diseñados para amar vivir
               </h1>
-              <p className="fs-4 text-white mb-4 animated slideInDown">
-                Deluxe Travel Ecuador — viajes exclusivos, destinos únicos y
-                servicio personalizado en todo el mundo
+              <p className="fs-5 fs-md-4 text-white mb-4 animated slideInDown px-2">
+                Deluxe Travel Ecuador — tours por la Amazonía, Andes y costa
               </p>
               <form
-                className="position-relative w-75 mx-auto animated slideInDown"
+                className="position-relative w-100 px-2 px-sm-3 mx-auto hero-search-form animated slideInDown"
+                style={{ maxWidth: 560 }}
                 onSubmit={handleSearch}
                 role="search"
               >

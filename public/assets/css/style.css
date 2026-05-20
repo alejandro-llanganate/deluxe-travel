@@ -127,11 +127,11 @@
 
 @media (max-width: 991.98px) {
     .navbar-brand .logo-light {
-        display: block !important;
+        display: none !important;
     }
 
     .navbar-brand .logo-dark {
-        display: none !important;
+        display: block !important;
     }
 }
 
@@ -139,18 +139,6 @@
     .sticky-top.navbar-light {
         position: relative;
         background: #FFFFFF;
-    }
-
-    .navbar-light .navbar-collapse {
-        margin-top: 15px;
-        border-top: 1px solid #DDDDDD;
-    }
-
-    .navbar-light .navbar-nav .nav-link,
-    .sticky-top.navbar-light .navbar-nav .nav-link {
-        padding: 10px 0;
-        margin-left: 0;
-        color: var(--dark) !important;
     }
 
     .navbar-light .navbar-brand img {
@@ -494,6 +482,192 @@
 
 .about-photo-link:hover .about-photo-caption {
     background: linear-gradient(transparent, rgba(242, 113, 39, 0.9));
+}
+
+/*** Responsive global + menú móvil ***/
+html {
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.topbar-mobile {
+    background: var(--dark);
+    text-align: center;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+}
+
+.topbar-mobile-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-wrapper {
+    z-index: 1030;
+}
+
+.navbar-toggler-icon-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.35rem;
+    color: var(--dark);
+}
+
+@media (max-width: 991.98px) {
+    .navbar.navbar-expand-lg {
+        background: #fff;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .navbar-light .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(320px, 88vw);
+        max-width: 100%;
+        margin: 0;
+        padding: 5rem 1.25rem 1.5rem;
+        background: #fff;
+        border-top: none;
+        border-left: 1px solid #eee;
+        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+        overflow-y: auto;
+        z-index: 1045;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        visibility: hidden;
+    }
+
+    .navbar-light .navbar-collapse.show {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    .navbar-light .navbar-collapse:not(.show) {
+        display: block !important;
+        height: auto;
+    }
+
+    .navbar-light .navbar-nav .nav-link,
+    .sticky-top.navbar-light .navbar-nav .nav-link {
+        padding: 0.75rem 0;
+        margin-right: 0;
+        font-size: 1.05rem;
+        color: var(--dark) !important;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .navbar-light .navbar-nav .nav-link.active {
+        color: var(--primary) !important;
+        font-weight: 700;
+    }
+
+    .navbar-actions {
+        margin-top: 0.5rem;
+    }
+
+    .navbar-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 1040;
+        background: rgba(20, 20, 31, 0.45);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .hero-header-home {
+        margin-bottom: 0 !important;
+    }
+
+    .hero-header-home .display-3,
+    .hero-title {
+        font-size: clamp(1.75rem, 7vw, 2.75rem);
+    }
+
+    .hero-header-home .container {
+        padding-top: 1rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .hero-header-home .pt-lg-5,
+    .hero-header-home .mt-lg-5 {
+        padding-top: 2rem !important;
+        margin-top: 0 !important;
+    }
+
+    .hero-search-form .btn {
+        font-size: 0.9rem;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    .instagram-reel-embed {
+        min-height: 380px;
+    }
+
+    .instagram-reel-embed iframe {
+        min-height: 380px;
+    }
+
+    .ecuador-leaflet-map {
+        height: 320px;
+    }
+
+    .ecuador-map-sidebar {
+        margin-top: 0.5rem;
+    }
+
+    .booking-card {
+        padding: 1.25rem !important;
+    }
+
+    .footer .row.g-5 > [class*="col-"] {
+        text-align: center;
+    }
+
+    .footer .btn-link {
+        text-align: center !important;
+    }
+
+    .footer-menu a {
+        display: inline-block;
+        margin: 0.25rem 0.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-search-form input {
+        font-size: 0.95rem;
+        padding-right: 5.5rem !important;
+    }
+
+    .package-item .package-body {
+        padding: 1rem;
+    }
+
+    .whatsapp-float {
+        right: 16px;
+        bottom: 90px;
+    }
+
+    .back-to-top {
+        right: 16px;
+        bottom: 16px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 
