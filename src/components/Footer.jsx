@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { PHONE_DISPLAY, PHONE_TEL, getWhatsAppUrl } from '../data/contact'
+import { useI18n } from '../i18n/LanguageContext'
 
 export default function Footer() {
+  const { t } = useI18n()
+
   return (
     <div>
       <div
@@ -19,28 +22,28 @@ export default function Footer() {
                 style={{ maxHeight: 70 }}
               />
               <p className="mb-4" style={{ color: '#5A6D7E' }}>
-                Viajes diseñados para amar vivir
+                {t('footer.tagline')}
               </p>
               <div className="d-flex flex-column gap-1">
                 <Link className="btn btn-link text-start ps-0" to="/packages">
-                  Paquetes
+                  {t('nav.packages')}
                 </Link>
                 <Link className="btn btn-link text-start ps-0" to="/about">
-                  Sobre nosotros
+                  {t('nav.about')}
                 </Link>
                 <Link className="btn btn-link text-start ps-0" to="/#reservas">
-                  Reservar
+                  {t('nav.book')}
                 </Link>
                 <Link className="btn btn-link text-start ps-0" to="/contact">
-                  Contacto
+                  {t('nav.contact')}
                 </Link>
               </div>
             </div>
             <div className="col-lg-6 col-md-6">
-              <h4 className="text-white mb-3">Contacto</h4>
+              <h4 className="text-white mb-3">{t('contact.subtitle')}</h4>
               <p className="mb-2">
                 <i className="fa fa-map-marker-alt me-3" />
-                Quito, Ecuador
+                {t('topbar.location')}
               </p>
               <p className="mb-2">
                 <i className="fa fa-phone-alt me-3" />
@@ -51,22 +54,22 @@ export default function Footer() {
               <p className="mb-3">
                 <i className="fab fa-whatsapp me-3" />
                 <a
-                  href={getWhatsAppUrl('Hola Deluxe Travel')}
+                  href={getWhatsAppUrl(t('whatsapp.general'))}
                   className="text-light"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  WhatsApp {PHONE_DISPLAY}
+                  {t('common.whatsapp')} {PHONE_DISPLAY}
                 </a>
               </p>
               <a
-                href={getWhatsAppUrl('Hola Deluxe Travel')}
+                href={getWhatsAppUrl(t('whatsapp.general'))}
                 className="btn btn-success rounded-pill py-2 px-4"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <i className="fab fa-whatsapp me-2" />
-                Escríbenos
+                {t('contact.writeUs')}
               </a>
             </div>
           </div>
@@ -79,13 +82,13 @@ export default function Footer() {
                 <Link className="border-bottom text-light" to="/">
                   Deluxe Travel Ecuador
                 </Link>
-                . Todos los derechos reservados.
+                . {t('footer.rights')}
               </div>
               <div className="col-md-6 text-center text-md-end">
                 <div className="footer-menu">
-                  <Link to="/">Inicio</Link>
-                  <Link to="/packages">Paquetes</Link>
-                  <Link to="/contact">Contacto</Link>
+                  <Link to="/">{t('nav.home')}</Link>
+                  <Link to="/packages">{t('nav.packages')}</Link>
+                  <Link to="/contact">{t('nav.contact')}</Link>
                 </div>
               </div>
             </div>

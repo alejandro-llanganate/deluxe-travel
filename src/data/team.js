@@ -11,8 +11,8 @@ export const teamMembers = [
     facebook: '',
   },
   {
-    id: 'damina',
-    name: 'Damina',
+    id: 'damian',
+    name: 'Damian',
     role: 'Cofundadora · Coordinación de viajes',
     bio: 'Organiza cada detalle para que tu viaje sea fluido, seguro y memorable. Atención cercana antes, durante y después del tour.',
     image: assetPath('assets/img/team/integrante-2.png'),

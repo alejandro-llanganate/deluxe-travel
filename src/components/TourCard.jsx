@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getWhatsAppLink } from '../data/tours'
+import { useI18n } from '../i18n/LanguageContext'
 
 export default function TourCard({ tour, delay = '0.1s' }) {
+  const { t, getWhatsAppLink } = useI18n()
+
   return (
-    <div
-      className="col-lg-4 col-md-6 wow fadeInUp"
-      data-wow-delay={delay}
-    >
+    <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay={delay}>
       <div className="package-item h-100">
         <div className="overflow-hidden">
           <img
@@ -30,14 +29,16 @@ export default function TourCard({ tour, delay = '0.1s' }) {
           </small>
           <small className="flex-fill text-center py-2">
             <i className="fa fa-check text-primary me-2" />
-            {tour.included ? 'Incluido' : 'Consultar'}
+            {tour.included ? t('common.included') : t('common.askUs')}
           </small>
         </div>
         <div className="text-center p-4 d-flex flex-column flex-grow-1">
           <h4 className="mb-1">{tour.title}</h4>
           <p className="text-muted small mb-2">{tour.subtitle}</p>
-          <h3 className="mb-0 text-primary">${tour.price} USD</h3>
-          <p className="small text-muted mb-3">por persona</p>
+          <h3 className="mb-0 text-primary">
+            ${tour.price} {t('common.usd')}
+          </h3>
+          <p className="small text-muted mb-3">{t('common.perPerson')}</p>
           <p className="flex-grow-1">{tour.description.slice(0, 100)}…</p>
           <div className="d-flex justify-content-center mb-2">
             <Link
@@ -45,7 +46,7 @@ export default function TourCard({ tour, delay = '0.1s' }) {
               className="btn btn-sm btn-primary px-3 border-end"
               style={{ borderRadius: '30px 0 0 30px' }}
             >
-              Ver más
+              {t('common.seeMore')}
             </Link>
             <a
               href={getWhatsAppLink(tour)}
@@ -54,7 +55,7 @@ export default function TourCard({ tour, delay = '0.1s' }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Reservar
+              {t('common.book')}
             </a>
           </div>
         </div>

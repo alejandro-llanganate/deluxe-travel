@@ -1,10 +1,10 @@
 import React from 'react'
 import { getWhatsAppUrl, PHONE_DISPLAY } from '../data/contact'
+import { useI18n } from '../i18n/LanguageContext'
 
 export default function WhatsAppFloat() {
-  const href = getWhatsAppUrl(
-    'Hola Deluxe Travel, me gustaría información sobre sus paquetes.'
-  )
+  const { t } = useI18n()
+  const href = getWhatsAppUrl(t('whatsapp.general'))
 
   return (
     <a
@@ -12,8 +12,8 @@ export default function WhatsAppFloat() {
       className="whatsapp-float"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Chatear por WhatsApp al ${PHONE_DISPLAY}`}
-      title={`WhatsApp ${PHONE_DISPLAY}`}
+      aria-label={`${t('common.whatsapp')} ${PHONE_DISPLAY}`}
+      title={`${t('common.whatsapp')} ${PHONE_DISPLAY}`}
     >
       <i className="fab fa-whatsapp" />
     </a>

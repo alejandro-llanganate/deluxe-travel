@@ -5,8 +5,10 @@ import {
   PHONE_TEL,
   getWhatsAppUrl,
 } from '../data/contact'
+import { useI18n } from '../i18n/LanguageContext'
 
 function Contact() {
+  const { t } = useI18n()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [subject, setSubject] = useState('')
@@ -15,47 +17,41 @@ function Contact() {
   function handleSubmit(e) {
     e.preventDefault()
     const text = [
-      'Hola Deluxe Travel,',
+      t('whatsapp.contactFormHello'),
       '',
-      name ? `Nombre: ${name}` : null,
-      email ? `Correo: ${email}` : null,
-      subject ? `Asunto: ${subject}` : null,
-      message ? `Mensaje: ${message}` : null,
+      name ? `${t('whatsapp.fieldName')}: ${name}` : null,
+      email ? `${t('whatsapp.fieldEmail')}: ${email}` : null,
+      subject ? `${t('whatsapp.fieldSubject')}: ${subject}` : null,
+      message ? `${t('whatsapp.fieldMessage')}: ${message}` : null,
     ]
       .filter(Boolean)
       .join('\n')
     window.open(getWhatsAppUrl(text), '_blank', 'noopener,noreferrer')
   }
 
-  const waGeneral = getWhatsAppUrl(
-    'Hola Deluxe Travel, quiero información sobre sus paquetes.'
-  )
+  const waGeneral = getWhatsAppUrl(t('whatsapp.general'))
 
   return (
     <div>
       <PageHero
-        title="Contacto"
+        title={t('contact.pageTitle')}
         breadcrumbs={[
-          { label: 'Inicio', to: '/' },
-          { label: 'Contacto' },
+          { label: t('common.breadcrumbHome'), to: '/' },
+          { label: t('contact.pageTitle') },
         ]}
       />
       <div className="container-xxl py-5">
         <div className="container">
           <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 className="section-title bg-white text-center text-primary px-3">
-              Contacto
+              {t('contact.subtitle')}
             </h6>
-            <h1 className="mb-5">Escríbenos, estamos para ayudarte</h1>
+            <h1 className="mb-5">{t('contact.title')}</h1>
           </div>
           <div className="row g-4">
             <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-              <h5>Ponte en contacto</h5>
-              <p className="mb-4">
-                ¿Dudas sobre un paquete, fechas o formas de pago? Escríbenos por
-                WhatsApp o usa el formulario. Reservas con{' '}
-                <strong>50% de anticipo</strong>.
-              </p>
+              <h5>{t('contact.subtitle')}</h5>
+              <p className="mb-4">{t('contact.intro')}</p>
               <div className="d-flex align-items-center mb-4">
                 <div
                   className="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary"
@@ -64,8 +60,8 @@ function Contact() {
                   <i className="fa fa-map-marker-alt text-white" />
                 </div>
                 <div className="ms-3">
-                  <h5 className="text-primary">Oficina</h5>
-                  <p className="mb-0">Quito, Ecuador</p>
+                  <h5 className="text-primary">{t('contact.office')}</h5>
+                  <p className="mb-0">{t('topbar.location')}</p>
                 </div>
               </div>
               <div className="d-flex align-items-center mb-4">
@@ -76,7 +72,7 @@ function Contact() {
                   <i className="fa fa-phone-alt text-white" />
                 </div>
                 <div className="ms-3">
-                  <h5 className="text-primary">Teléfono / WhatsApp</h5>
+                  <h5 className="text-primary">{t('contact.phoneLabel')}</h5>
                   <p className="mb-0">
                     <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
                   </p>
@@ -89,12 +85,12 @@ function Contact() {
                 rel="noopener noreferrer"
               >
                 <i className="fab fa-whatsapp me-2" />
-                WhatsApp {PHONE_DISPLAY}
+                {t('common.whatsapp')} {PHONE_DISPLAY}
               </a>
             </div>
             <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
               <iframe
-                title="Ubicación de Deluxe Travel en Quito, Ecuador"
+                title="Deluxe Travel Quito"
                 className="position-relative rounded w-100 h-100"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.802489475!2d-78.4678!3d-0.1807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUXVpdG8sIEVjdWFkb3I!5e0!3m2!1ses!2sec!4v1"
                 style={{ minHeight: 300, border: 0 }}
@@ -115,12 +111,12 @@ function Contact() {
                         type="text"
                         className="form-control"
                         id="name"
-                        placeholder="Tu nombre"
+                        placeholder={t('booking.name')}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
                       />
-                      <label htmlFor="name">Tu nombre</label>
+                      <label htmlFor="name">{t('booking.name')}</label>
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -129,11 +125,11 @@ function Contact() {
                         type="email"
                         className="form-control"
                         id="email"
-                        placeholder="Tu correo"
+                        placeholder={t('booking.email')}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
-                      <label htmlFor="email">Tu correo</label>
+                      <label htmlFor="email">{t('booking.email')}</label>
                     </div>
                   </div>
                   <div className="col-12">
@@ -142,24 +138,24 @@ function Contact() {
                         type="text"
                         className="form-control"
                         id="subject"
-                        placeholder="Asunto"
+                        placeholder={t('contact.subject')}
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
                       />
-                      <label htmlFor="subject">Asunto</label>
+                      <label htmlFor="subject">{t('contact.subject')}</label>
                     </div>
                   </div>
                   <div className="col-12">
                     <div className="form-floating">
                       <textarea
                         className="form-control"
-                        placeholder="Escribe tu mensaje aquí"
+                        placeholder={t('contact.message')}
                         id="message"
                         style={{ height: 100 }}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                       />
-                      <label htmlFor="message">Mensaje</label>
+                      <label htmlFor="message">{t('contact.message')}</label>
                     </div>
                   </div>
                   <div className="col-12">
@@ -168,7 +164,7 @@ function Contact() {
                       type="submit"
                     >
                       <i className="fab fa-whatsapp me-2" />
-                      Enviar por WhatsApp
+                      {t('contact.sendWhatsapp')}
                     </button>
                   </div>
                 </div>

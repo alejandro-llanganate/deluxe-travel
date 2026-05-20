@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline, CircleMarker } from '
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { DESTINATION_POINTS, HUB } from '../data/destinationsMap'
-import { tours } from '../data/tours'
+import { useI18n } from '../i18n/LanguageContext'
 
 const ecuadorBounds = [
   [-5.2, -81.5],
@@ -35,11 +35,8 @@ const destIconActive = L.divIcon({
   popupAnchor: [0, -34],
 })
 
-function getTour(slug) {
-  return tours.find((t) => t.slug === slug)
-}
-
 export default function EcuadorOperationsMap() {
+  const { t, getTourBySlug } = useI18n()
   const [activeSlug, setActiveSlug] = useState(DESTINATION_POINTS[0].slug)
 
   const routeLine = useMemo(
@@ -51,19 +48,19 @@ export default function EcuadorOperationsMap() {
   )
 
   const activePoint = DESTINATION_POINTS.find((p) => p.slug === activeSlug)
-  const activeTour = activePoint ? getTour(activePoint.slug) : null
+  const activeTour = activePoint ? getTourBySlug(activePoint.slug) : null
+  const destLabel = (slug) => t(`destinations.${slug}`) || {}
 
   return (
     <section className="container-xxl py-5 ecuador-map-section bg-light">
       <div className="container">
         <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
           <h6 className="section-title bg-light text-center text-primary px-3">
-            Cobertura
+            {t('map.subtitle')}
           </h6>
-          <h2 className="mb-3">Mapa de operaciones en Ecuador</h2>
+          <h2 className="mb-3">{t('map.title')}</h2>
           <p className="text-muted mb-5 mx-auto" style={{ maxWidth: 680 }}>
-            Todos nuestros paquetes salen desde Quito y te llevan a destinos
-            reales que operamos hoy. Explora el mapa y elige tu próxima aventura.
+            {t('map.intro')}
           </p>
         </div>
 
@@ -91,31 +88,36 @@ export default function EcuadorOperationsMap() {
                 />
                 <Marker position={[HUB.lat, HUB.lng]} icon={hubIcon}>
                   <Popup>
-                    <strong>{HUB.name}</strong>
+                    <strong>{t('map.hubName')}</strong>
                     <br />
-                    {HUB.subtitle}
+                    {t('map.hubSubtitle')}
                   </Popup>
                 </Marker>
-                {DESTINATION_POINTS.map((point) => (
-                  <Marker
-                    key={point.slug}
-                    position={[point.lat, point.lng]}
-                    icon={
-                      point.slug === activeSlug ? destIconActive : destIcon
-                    }
-                    eventHandlers={{
-                      click: () => setActiveSlug(point.slug),
-                    }}
-                  >
-                    <Popup>
-                      <strong>{point.name}</strong>
-                      <br />
-                      {point.region}
-                      <br />
-                      <Link to={`/tours/${point.slug}`}>Ver paquete</Link>
-                    </Popup>
-                  </Marker>
-                ))}
+                {DESTINATION_POINTS.map((point) => {
+                  const label = destLabel(point.slug)
+                  return (
+                    <Marker
+                      key={point.slug}
+                      position={[point.lat, point.lng]}
+                      icon={
+                        point.slug === activeSlug ? destIconActive : destIcon
+                      }
+                      eventHandlers={{
+                        click: () => setActiveSlug(point.slug),
+                      }}
+                    >
+                      <Popup>
+                        <strong>{label.name || point.name}</strong>
+                        <br />
+                        {label.region || point.region}
+                        <br />
+                        <Link to={`/tours/${point.slug}`}>
+                          {t('map.viewPackage')}
+                        </Link>
+                      </Popup>
+                    </Marker>
+                  )
+                })}
                 <CircleMarker
                   center={[HUB.lat, HUB.lng]}
                   radius={28}
@@ -129,10 +131,10 @@ export default function EcuadorOperationsMap() {
               </MapContainer>
               <div className="ecuador-map-legend">
                 <span>
-                  <i className="map-legend-dot map-legend-hub" /> Quito — base
+                  <i className="map-legend-dot map-legend-hub" /> {t('map.legendHub')}
                 </span>
                 <span>
-                  <i className="map-legend-dot map-legend-dest" /> Destinos activos
+                  <i className="map-legend-dot map-legend-dest" /> {t('map.legendDest')}
                 </span>
               </div>
             </div>
@@ -140,10 +142,11 @@ export default function EcuadorOperationsMap() {
 
           <div className="col-lg-4 wow fadeInUp" data-wow-delay="0.25s">
             <div className="ecuador-map-sidebar h-100">
-              <h5 className="text-primary mb-3">Destinos que operamos</h5>
+              <h5 className="text-primary mb-3">{t('map.sidebarTitle')}</h5>
               <ul className="list-unstyled ecuador-dest-list mb-4">
                 {DESTINATION_POINTS.map((point) => {
-                  const tour = getTour(point.slug)
+                  const tour = getTourBySlug(point.slug)
+                  const label = destLabel(point.slug)
                   return (
                     <li key={point.slug}>
                       <button
@@ -155,9 +158,9 @@ export default function EcuadorOperationsMap() {
                       >
                         <span className="ecuador-dest-dot" />
                         <span>
-                          <strong>{point.name}</strong>
+                          <strong>{label.name || point.name}</strong>
                           <small className="d-block text-muted">
-                            {point.region}
+                            {label.region || point.region}
                           </small>
                         </span>
                         {tour && (
@@ -186,13 +189,14 @@ export default function EcuadorOperationsMap() {
                     <h6 className="mb-1">{activeTour.title}</h6>
                     <p className="small text-muted mb-2">{activeTour.subtitle}</p>
                     <p className="small mb-3">
-                      {activeTour.durationShort} · Desde {activeTour.departure}
+                      {activeTour.durationShort} {t('map.departureFrom')}{' '}
+                      {activeTour.departure}
                     </p>
                     <Link
                       to={`/tours/${activeTour.slug}`}
                       className="btn btn-primary btn-sm rounded-pill w-100"
                     >
-                      Ver paquete
+                      {t('map.viewPackage')}
                     </Link>
                   </div>
                 </div>

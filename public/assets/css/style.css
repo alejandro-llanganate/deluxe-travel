@@ -484,6 +484,55 @@
     background: linear-gradient(transparent, rgba(242, 113, 39, 0.9));
 }
 
+/*** Selector de idioma ***/
+.lang-switcher {
+    display: inline-flex;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.topbar-desktop .lang-switcher {
+    flex-shrink: 0;
+}
+
+.navbar-actions .lang-switcher,
+.navbar .d-lg-none .lang-switcher {
+    border-color: rgba(0, 0, 0, 0.12);
+    background: #f5f5f5;
+}
+
+.lang-switcher-btn {
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.navbar-actions .lang-switcher-btn,
+.navbar .d-lg-none .lang-switcher-btn {
+    color: #5a6d7e;
+}
+
+.lang-switcher-btn.active {
+    background: #F27127;
+    color: #fff;
+}
+
+.lang-switcher-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.navbar-actions .lang-switcher-btn:hover:not(.active) {
+    background: rgba(242, 113, 39, 0.12);
+    color: #F27127;
+}
+
 /*** Responsive global + menú móvil ***/
 html {
     overflow-x: hidden;

@@ -1,12 +1,14 @@
 import React from 'react'
 import TourCard from './TourCard'
-import { tours } from '../data/tours'
+import { useI18n } from '../i18n/LanguageContext'
 
 export default function TourGrid({
-  title = 'Nuestros destinos',
-  subtitle = 'Experiencias',
+  title,
+  subtitle,
   compactTop = false,
 }) {
+  const { t, tours } = useI18n()
+
   return (
     <div className={`container-xxl py-5${compactTop ? ' pt-2' : ''}`}>
       <div className="container">
@@ -16,8 +18,7 @@ export default function TourGrid({
           </h6>
           <h1 className="mb-5">{title}</h1>
           <p className="mb-5 mx-auto" style={{ maxWidth: 640 }}>
-            Creamos Deluxe Travel para que tus experiencias por Ecuador sean
-            extraordinarias. ¡Vamos, viajemos juntos!
+            {t('packages.intro')}
           </p>
         </div>
         <div className="row g-4 justify-content-center">

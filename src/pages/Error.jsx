@@ -1,15 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PageHero from '../components/PageHero'
+import { useI18n } from '../i18n/LanguageContext'
 
 function Error() {
+  const { t } = useI18n()
+
   return (
     <div>
       <PageHero
-        title="Página no encontrada"
+        title={t('error.title')}
         breadcrumbs={[
-          { label: 'Inicio', to: '/' },
-          { label: '404' },
+          { label: t('common.breadcrumbHome'), to: '/' },
+          { label: t('error.breadcrumb') },
         ]}
       />
       <div className="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -18,22 +21,19 @@ function Error() {
             <div className="col-lg-6">
               <i className="bi bi-exclamation-triangle display-1 text-primary" />
               <h1 className="display-1">404</h1>
-              <h1 className="mb-4">No encontramos esta página</h1>
-              <p className="mb-4">
-                Lo sentimos, la página que buscas no existe o fue movida. Vuelve
-                al inicio o explora nuestros paquetes por Ecuador.
-              </p>
+              <h1 className="mb-4">{t('error.heading')}</h1>
+              <p className="mb-4">{t('error.text')}</p>
               <Link
                 to="/"
                 className="btn btn-primary rounded-pill py-3 px-5 me-2"
               >
-                Ir al inicio
+                {t('error.home')}
               </Link>
               <Link
                 to="/packages"
                 className="btn btn-outline-primary rounded-pill py-3 px-5"
               >
-                Ver paquetes
+                {t('error.packages')}
               </Link>
             </div>
           </div>

@@ -1,15 +1,13 @@
 import React from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import PageHero from '../components/PageHero'
-import {
-  getTourBySlug,
-  getWhatsAppLink,
-  WHATSAPP_DISPLAY,
-} from '../data/tours'
+import { useI18n } from '../i18n/LanguageContext'
 import { getDepositAmount } from '../data/contact'
+import { PHONE_DISPLAY } from '../data/contact'
 
 export default function TourDetail() {
   const { slug } = useParams()
+  const { t, getTourBySlug, getWhatsAppLink } = useI18n()
   const tour = getTourBySlug(slug)
 
   if (!tour) {
@@ -24,8 +22,8 @@ export default function TourDetail() {
       <PageHero
         title={tour.title}
         breadcrumbs={[
-          { label: 'Inicio', to: '/' },
-          { label: 'Paquetes', to: '/packages' },
+          { label: t('common.breadcrumbHome'), to: '/' },
+          { label: t('common.breadcrumbPackages'), to: '/packages' },
           { label: tour.title },
         ]}
       />
@@ -69,41 +67,46 @@ export default function TourDetail() {
                 <div className="col-sm-6">
                   <div className="border rounded p-3 h-100">
                     <i className="fa fa-calendar-alt text-primary me-2" />
-                    <strong>Duración</strong>
+                    <strong>{t('common.duration')}</strong>
                     <p className="mb-0 mt-1">{tour.duration}</p>
                   </div>
                 </div>
                 <div className="col-sm-6">
                   <div className="border rounded p-3 h-100">
                     <i className="fa fa-bus text-primary me-2" />
-                    <strong>Salida</strong>
-                    <p className="mb-0 mt-1">Desde {tour.departure}</p>
+                    <strong>{t('common.departure')}</strong>
+                    <p className="mb-0 mt-1">
+                      {t('common.from')} {tour.departure}
+                    </p>
                   </div>
                 </div>
                 <div className="col-sm-6">
                   <div className="border rounded p-3 h-100 bg-primary text-white">
                     <i className="fa fa-tag me-2" />
-                    <strong>Precio</strong>
+                    <strong>{t('common.price')}</strong>
                     <p className="mb-0 mt-1 fs-4 fw-bold">
                       ${tour.price} {tour.currency}
-                      <small className="d-block fs-6 fw-normal">por persona</small>
+                      <small className="d-block fs-6 fw-normal">
+                        {t('common.perPerson')}
+                      </small>
                     </p>
                   </div>
                 </div>
                 <div className="col-sm-6">
                   <div className="border rounded p-3 h-100">
                     <i className="fa fa-wallet text-primary me-2" />
-                    <strong>Reserva (50%)</strong>
+                    <strong>{t('common.reserve50')}</strong>
                     <p className="mb-0 mt-1">
-                      Anticipo de ${deposit50} USD (50% del paquete) para
-                      asegurar tu cupo
+                      {t('common.depositNote', { amount: deposit50 })}
                     </p>
                   </div>
                 </div>
               </div>
 
               {tour.included && (
-                <span className="badge bg-primary mb-3 me-2">Todo incluido</span>
+                <span className="badge bg-primary mb-3 me-2">
+                  {t('common.allIncluded')}
+                </span>
               )}
               {tour.extra && (
                 <span className="badge bg-secondary mb-3">{tour.extra}</span>
@@ -111,7 +114,7 @@ export default function TourDetail() {
 
               {tour.stops && (
                 <div className="mb-4">
-                  <strong className="d-block mb-2">Destinos del recorrido:</strong>
+                  <strong className="d-block mb-2">{t('common.routeStops')}</strong>
                   <div className="d-flex flex-wrap gap-2">
                     {tour.stops.map((stop) => (
                       <span key={stop} className="badge border text-dark">
@@ -130,19 +133,18 @@ export default function TourDetail() {
                   rel="noopener noreferrer"
                 >
                   <i className="fab fa-whatsapp me-2" />
-                  Reservar — {WHATSAPP_DISPLAY}
+                  {t('common.book')} — {PHONE_DISPLAY}
                 </a>
                 <Link
                   to="/#reservas"
                   className="btn btn-outline-primary rounded-pill py-3 px-4"
                 >
-                  Formulario de reserva
+                  {t('common.bookingForm')}
                 </Link>
               </div>
 
               <p className="small text-muted mt-3 mb-0">
-                Paga el 50% para confirmar y el saldo antes o durante el viaje.
-                Aceptamos tarjeta, transferencia o efectivo.
+                {t('common.paymentNote')}
               </p>
             </div>
           </div>
@@ -150,7 +152,7 @@ export default function TourDetail() {
           {tour.packageIncludes?.length > 0 && (
             <div className="row g-5 mt-2">
               <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h3 className="mb-4">Qué incluye el paquete</h3>
+                <h3 className="mb-4">{t('common.packageIncludes')}</h3>
                 <ul className="list-unstyled tour-includes-list">
                   {tour.packageIncludes.map((item) => (
                     <li key={item} className="mb-2">
@@ -162,7 +164,7 @@ export default function TourDetail() {
               </div>
               {tour.notIncluded?.length > 0 && (
                 <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
-                  <h3 className="mb-4">No incluye</h3>
+                  <h3 className="mb-4">{t('common.notIncludes')}</h3>
                   <ul className="list-unstyled text-muted">
                     {tour.notIncluded.map((item) => (
                       <li key={item} className="mb-2">
@@ -178,7 +180,7 @@ export default function TourDetail() {
 
           <div className="row g-5 mt-2">
             <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-              <h3 className="mb-4">Lo más destacado</h3>
+              <h3 className="mb-4">{t('common.highlights')}</h3>
               <ul className="list-unstyled">
                 {tour.highlights.map((item) => (
                   <li key={item} className="mb-2">
@@ -189,7 +191,7 @@ export default function TourDetail() {
               </ul>
             </div>
             <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-              <h3 className="mb-4">Itinerario</h3>
+              <h3 className="mb-4">{t('common.itinerary')}</h3>
               <ul className="list-unstyled">
                 {tour.itinerary.map((step, i) => (
                   <li key={step} className="mb-2 d-flex">

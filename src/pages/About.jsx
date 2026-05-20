@@ -2,15 +2,18 @@ import React from 'react'
 import PageHero from '../components/PageHero'
 import AboutContent from '../components/AboutContent'
 import TeamSection from '../components/TeamSection'
+import { useI18n } from '../i18n/LanguageContext'
 
 function About() {
+  const { t } = useI18n()
+
   return (
     <div>
       <PageHero
-        title="Sobre nosotros"
+        title={t('about.pageTitle')}
         breadcrumbs={[
-          { label: 'Inicio', to: '/' },
-          { label: 'Sobre nosotros' },
+          { label: t('common.breadcrumbHome'), to: '/' },
+          { label: t('about.pageTitle') },
         ]}
       />
       <div className="container-xxl py-5">
