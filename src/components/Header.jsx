@@ -16,6 +16,7 @@ const NAV_KEYS = [
 function Header() {
   const { t } = useI18n()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
@@ -28,6 +29,17 @@ function Header() {
       document.body.style.overflow = ''
     }
   }, [menuOpen])
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 45)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const langVariantDesktop = scrolled ? 'light' : 'dark'
 
   return (
     <header className="site-header">
@@ -59,12 +71,15 @@ function Header() {
               contacto@deluxetravel.ec
             </small>
           </div>
-          <LanguageSwitcher variant="dark" />
         </div>
       </div>
 
       <div className="container-fluid position-relative p-0 navbar-wrapper">
-        <nav className="navbar navbar-expand-lg navbar-light px-3 px-lg-5 py-2 py-lg-0">
+        <nav
+          className={`navbar navbar-expand-lg navbar-light px-3 px-lg-5 py-2 py-lg-0${
+            scrolled ? ' sticky-top shadow-sm' : ''
+          }`}
+        >
           <Link to="/" className="navbar-brand p-0" onClick={() => setMenuOpen(false)}>
             <img
               src={`${process.env.PUBLIC_URL}/logo_darkmode.png`}
@@ -98,7 +113,7 @@ function Header() {
             className={`collapse navbar-collapse ${menuOpen ? 'show' : ''}`}
             id="navbarCollapse"
           >
-            <div className="navbar-nav ms-lg-auto py-2 py-lg-0">
+            <div className="navbar-nav ms-lg-auto py-2 py-lg-0 align-items-lg-center">
               {NAV_KEYS.map((item) => (
                 <NavLink
                   key={item.to}
@@ -112,9 +127,14 @@ function Header() {
                   {t(item.key)}
                 </NavLink>
               ))}
+              <div className="nav-item navbar-lang-desktop d-none d-lg-flex align-items-center">
+                <LanguageSwitcher variant={langVariantDesktop} />
+              </div>
             </div>
             <div className="navbar-actions pt-2 pt-lg-0 pb-3 pb-lg-0 d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center gap-2">
-              <LanguageSwitcher variant="light" className="d-none d-lg-flex" />
+              <div className="d-lg-none px-1 pb-2">
+                <LanguageSwitcher variant="light" />
+              </div>
               <Link
                 to="/#reservas"
                 className="btn btn-primary rounded-pill w-100 w-lg-auto py-2 px-4"
