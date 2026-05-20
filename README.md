@@ -20,11 +20,15 @@ Coloca el video del hero en `public/assets/video/hero-amazon.mp4` (no está en G
 1. En el repositorio: **Settings → Pages → Build and deployment → Source: GitHub Actions**
 2. Sube los cambios a `main`; el workflow `.github/workflows/deploy-pages.yml` despliega solo.
 
-### Opción B — Rama `gh-pages`
+### Opción B — Rama `gh-pages` (local)
 
 ```bash
 npm run deploy
 ```
+
+Antes del deploy se eliminan **videos `.mp4`** y **source maps** del build (evita el error HTTP 400).
+
+Si `npm run deploy` sigue fallando, usa la **Opción A** (GitHub Actions): suele ser más estable.
 
 ## Build de producción
 
