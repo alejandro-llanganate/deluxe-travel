@@ -59,7 +59,7 @@ function Header() {
               contacto@deluxetravel.ec
             </small>
           </div>
-          <LanguageSwitcher />
+          <LanguageSwitcher variant="dark" />
         </div>
       </div>
 
@@ -79,7 +79,7 @@ function Header() {
           </Link>
 
           <div className="d-flex align-items-center gap-2 ms-auto d-lg-none">
-            <LanguageSwitcher />
+            <LanguageSwitcher variant="light" />
             <button
               className={`navbar-toggler border-0 shadow-none ${menuOpen ? '' : 'collapsed'}`}
               type="button"
@@ -114,7 +114,7 @@ function Header() {
               ))}
             </div>
             <div className="navbar-actions pt-2 pt-lg-0 pb-3 pb-lg-0 d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center gap-2">
-              <LanguageSwitcher className="d-none d-lg-flex" />
+              <LanguageSwitcher variant="light" className="d-none d-lg-flex" />
               <Link
                 to="/#reservas"
                 className="btn btn-primary rounded-pill w-100 w-lg-auto py-2 px-4"
